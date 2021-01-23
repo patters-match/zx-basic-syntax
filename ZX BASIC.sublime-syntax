@@ -64,7 +64,7 @@ contexts:
     #function and subroutine definitions
     #uncomment the scopes below to highlight FUNCTION and SUB keywords to match ASM keyword
     #I judged this to be too cluttered, ideally these blocks should be nested for clarity. Inline ASM on the other hand definitely needs emphasis
-    - match: '\b(?i:FUNCTION|SUB)\b\s*({{identifier}})\b'
+    - match: '\b(?i:FUNCTION FASTCALL|FUNCTION|SUB)\b\s*({{identifier}})\b'
       captures:
         #0: punctuation.section.group.begin.zx-basic
         1: entity.name.function.zx-basic
