@@ -1,6 +1,6 @@
 # zx-basic-syntax
 
-ZX BASIC language syntax for editing `.bas` files in [Sublime Text](https://www.sublimetext.com) code editor.
+ZX BASIC language syntax for editing `.bas` files in [Sublime Text 3](https://www.sublimetext.com) code editor.
 
 ![screenshot of ZX BASIC highlighting](images/example.jpg?raw=true)
 
@@ -8,11 +8,10 @@ ZX BASIC language syntax for editing `.bas` files in [Sublime Text](https://www.
 
 This syntax highlighter does not exhaustively match all BASIC keywords, rather it focuses on code clarity. Mariana colour scheme (pictured) is recommended over the default Monokai, since some highlights are invisible in Monokai.
 
-### Included:
-- Comment lines, comment blocks, and strings with all [escaped characters](https://zxbasic.readthedocs.io/en/docs/syntax/#graphic-characters)
-- Keyword highlighting is limited to conditionals, and those which control the flow of the program
-- Sub and Function definitions and calls are highlighted, though the calls are indistinguishable from array references since the parser does not track objects
-- Inline ASM code blocks are excluded, but the comments within are correctly highlighted
+### Highlight Scope:
+- Comment lines, comment blocks, ASM comments, and strings with all [escaped characters](https://zxbasic.readthedocs.io/en/docs/syntax/#graphic-characters)
+- Keywords limited to conditionals and those which control the flow of the program
+- Sub and Function definitions and calls, though their calls are indistinguishable from array references since the parser does not track objects
 - Variable types, [numbers](https://zxbasic.readthedocs.io/en/docs/syntax/#numbers), separators, operator symbols, and compiler keywords
 
 ### Instructions:
