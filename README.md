@@ -11,7 +11,7 @@ This syntax highlighter does not exhaustively match all BASIC keywords, rather i
 ### Highlight Scope:
 - Comment lines, comment blocks, inline assembly comments
 - Strings with all [escaped characters](https://zxbasic.readthedocs.io/en/docs/syntax/#graphic-characters)
-- To avoid over-colouring, keywords are limited to conditionals and those which control the flow of the program (WHILE, UNTIL, LOOP, etc.)
+- To avoid over-colouring, keywords are limited to conditionals and those that control execution flow
 - Sub and Function definitions and calls, and although their calls are indistinguishable from array references since the parser does not track objects
 - Variable types, [numbers](https://zxbasic.readthedocs.io/en/docs/syntax/#numbers), separators, operator symbols, and compiler keywords
 
