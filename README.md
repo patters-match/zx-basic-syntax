@@ -12,5 +12,5 @@ Included:
 - Comments and strings, with all escaped characters described [here](https://zxbasic.readthedocs.io/en/docs/syntax/#graphic-characters)
 - Keyword highlighting is limited to conditionals, and those which control the flow of the program
 - Sub and Function definitions and calls are highlighted, though the calls are indistinguishable from array references since the parser does not track objects
-- Inline ASM code blocks are correctly excluded, but the comments within are highlighted
+- Inline ASM code blocks are excluded, but the comments within are correctly highlighted
 - Numbers, variable types, separators, operator symbols, and compiler keywords are also in
