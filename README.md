@@ -13,7 +13,7 @@ This syntax highlighter does not exhaustively match all BASIC keywords, rather i
 - Keyword highlighting is limited to conditionals, and those which control the flow of the program
 - Sub and Function definitions and calls are highlighted, though the calls are indistinguishable from array references since the parser does not track objects
 - Inline ASM code blocks are excluded, but the comments within are correctly highlighted
-- Numbers, variable types, separators, operator symbols, and compiler keywords are also in
+- Numbers, variable types, separators, operator symbols, and compiler keywords
 
 ## Instructions:
 - Sublime Text -> Preferences -> Browse Packages... which will show you the User folder location
