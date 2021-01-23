@@ -4,7 +4,7 @@ ZX BASIC language syntax for editing `.bas` files in [Sublime Text](https://www.
 
 ![screenshot of ZX BASIC highlighting](images/example.jpg?raw=true)
 
-ZX BASIC is an updated BASIC dialect which compiles to optimised Z80 machine code for the ZX Spectrum. Sublime Text is a good fit for [Boriel's ZX BASIC compiler](https://zxbasic.readthedocs.io/en/docs/about/) since both software projects will run on Linux, Mac OS, and Windows.
+ZX BASIC is an updated BASIC dialect which compiles to optimised Z80 machine code for the Sinclair ZX Spectrum computer. Sublime Text is a good fit for [Boriel's ZX BASIC compiler](https://zxbasic.readthedocs.io/en/docs/about/) since both software projects will run on Linux, Mac OS, and Windows.
 
 This syntax highlighter has been created using the public ZX BASIC documentation as a guide. It does not exhaustively match all BASIC keywords, rather it focuses on code clarity. Mariana colour scheme (pictured) is recommended over the default Monokai, since some highlights are invisible in Monokai.
 
