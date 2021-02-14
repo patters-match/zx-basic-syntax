@@ -17,5 +17,5 @@ This syntax highlighter does not exhaustively match all BASIC keywords, rather i
 
 ### Instructions:
 - Sublime Text -> Preferences -> Browse Packages... which will show you the User folder location
-- Download `ZX BASIC.sublime-syntax` from this repository to that folder
+- Download [`ZX BASIC.sublime-syntax`](https://raw.githubusercontent.com/patters-syno/zx-basic-syntax/main/ZX%20BASIC.sublime-syntax) from this repository to that folder
 - View -> Syntax -> ZX BASIC!
