@@ -13,7 +13,7 @@ This syntax highlighter does not exhaustively match all BASIC keywords, rather i
 - Strings including all [escaped characters](https://zxbasic.readthedocs.io/en/docs/syntax/#graphic-characters)
 - To avoid over-colouring, keywords are limited to conditionals and those controlling execution flow
 - Sub and Function definitions and calls, although their calls are indistinguishable from array references (and strings without sigils) since the parser does not track objects
-- Hovering the mouse over a Sub/Function name will allow you to jump to the function definition, and to other mentions
+- Hovering the mouse over a Sub/Function name to jump to the function definition, and to other mentions
 - Variable types, [numbers](https://zxbasic.readthedocs.io/en/docs/syntax/#numbers), separators, operator symbols, and compiler keywords
 
 ### Instructions:
