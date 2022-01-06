@@ -15,8 +15,9 @@ This syntax highlighter does not exhaustively match all BASIC keywords, rather i
 - Sub and Function definitions and calls, although their calls are indistinguishable from array references (and strings without sigils) since the parser does not track objects  
 *Hover the mouse pointer over a Sub/Function name to jump to the function definition, and to other mentions*
 - Variable types, [numbers](https://zxbasic.readthedocs.io/en/docs/syntax/#numbers), separators, operator symbols, and compiler keywords
+- Inline Z80 assembly language, via a dependency on https://github.com/mrcook/Z80Assembly
 
 ### Instructions:
 - Sublime Text -> Preferences -> Browse Packages... which will show you the User folder location
-- Download [`ZX BASIC.sublime-syntax`](https://raw.githubusercontent.com/patters-syno/zx-basic-syntax/main/ZX%20BASIC.sublime-syntax) to the User folder, ensuring your browser does not add .txt to the filename
+- Download [`ZX BASIC.sublime-syntax`](https://raw.githubusercontent.com/patters-syno/zx-basic-syntax/main/ZX%20BASIC.sublime-syntax) and [`Z80Assembly.tmLanguage.sublime-syntax)`](https://raw.githubusercontent.com/mrcook/Z80Assembly/master/Z80Assembly.tmLanguage.sublime-syntax) to the User folder, ensuring your browser does not add .txt to the filenames
 - View -> Syntax -> ZX BASIC!
