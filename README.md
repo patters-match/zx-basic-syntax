@@ -9,7 +9,7 @@ ZX BASIC language syntax for editing `.bas` files in [Sublime Text 3](https://ww
 This syntax highlighter does not exhaustively match all BASIC keywords, rather its focus is code clarity. Mariana colour scheme (pictured) is recommended over the default Monokai, since some highlights are invisible in Monokai.
 
 ### Highlighting Scope:
-- Comment lines, comment blocks, inline assembly comments
+- Comment lines, comment blocks
 - Strings including all [escaped characters](https://zxbasic.readthedocs.io/en/docs/syntax/#graphic-characters)
 - To avoid over-colouring, keywords are limited to conditionals and those controlling execution flow
 - Sub and Function definitions and calls, although their calls are indistinguishable from array references (and strings without sigils) since the parser does not track objects  
