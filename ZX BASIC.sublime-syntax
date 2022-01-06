@@ -199,37 +199,40 @@ contexts:
 
 
   inline-asm:
+    #uses an external syntax for ASM: https://github.com/mrcook/Z80Assembly
+    #if you would rather not highlight inline ASM, but still want comments to stand out, then
+    #comment this section and uncomment the two sections below
     - match: '\b(?i:ASM)\b'
-      scope: punctuation.section.group.begin.zx-basic    
-      push:
-        - meta_content_scope: meta.function.inline-asm.zx-basic 
-        - include: asm-comments #comments are highlighted as a bare minimum, but not much else as this is not my focus
-                                #try the commented block below as a replacement for this context if you need ASM highlighting
+      scope: punctuation.section.group.begin.zx-basic
+      push: Packages/User/Z80Assembly.tmLanguage.sublime-syntax
+      with_prototype:
         - match: '\b(?i:END ASM)\b'
           scope: punctuation.section.group.end.zx-basic
           pop: true
+
+
+
+#  inline-asm:
+#    - match: '\b(?i:ASM)\b'
+#      scope: punctuation.section.group.begin.zx-basic    
+#      push:
+#        - meta_content_scope: meta.function.inline-asm.zx-basic 
+#        - include: asm-comments #comments are highlighted as a bare minimum, but not much else as this is not my focus
+#                                #try the commented block below as a replacement for this context if you need ASM highlighting
+#        - match: '\b(?i:END ASM)\b'
+#          scope: punctuation.section.group.end.zx-basic
+#          pop: true
   
-
-  #inline-asm:
-  #  #use an externel syntax for ASM, e.g.: https://github.com/mrcook/SkoolkitZ80
-  #  #his doesn't work so well because this one in particular is quite dependent on a dedicated theme - non-standard scopes perhaps?
-  #  - match: '\b(?i:ASM)\b'
-  #    scope: punctuation.section.group.begin.zx-basic
-  #    push: Packages/User/SkoolkitZ80.sublime-syntax
-  #    with_prototype:
-  #      - match: '\b(?i:END ASM)\b'
-  #        scope: punctuation.section.group.end.zx-basic
-  #        pop: true
-
-
-  asm-comments:
-    #asm comments begin with ; and finish at the end of the line
-    - match: ';'
-      scope: punctuation.definition.comment.inline-asm.zx-basic
-      push:
-        - meta_scope: comment.line.inline-asm.zx-basic
-        - match: $
-          pop: true
+ 
+  
+#  asm-comments:
+#    #asm comments begin with ; and finish at the end of the line
+#    - match: ';'
+#      scope: punctuation.definition.comment.inline-asm.zx-basic
+#      push:
+#        - meta_scope: comment.line.inline-asm.zx-basic
+#        - match: $
+#          pop: true
 
 
         
