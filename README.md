@@ -19,5 +19,5 @@ This syntax highlighter does not exhaustively match all BASIC keywords, rather i
 
 ### Instructions:
 - Sublime Text -> Preferences -> Browse Packages... which will show you the User folder location
-- Download [`ZX BASIC.sublime-syntax`](https://raw.githubusercontent.com/patters-syno/zx-basic-syntax/main/ZX%20BASIC.sublime-syntax) and [`Z80Assembly.tmLanguage.sublime-syntax)`](https://raw.githubusercontent.com/mrcook/Z80Assembly/master/Z80Assembly.tmLanguage.sublime-syntax) to the User folder, ensuring your browser does not add .txt to the filenames
+- Download [`ZX BASIC.sublime-syntax`](https://raw.githubusercontent.com/patters-syno/zx-basic-syntax/main/ZX%20BASIC.sublime-syntax) and [`Z80Assembly.tmLanguage.sublime-syntax`](https://raw.githubusercontent.com/mrcook/Z80Assembly/master/Z80Assembly.tmLanguage.sublime-syntax) to the User folder, ensuring your browser does not add .txt to the filenames
 - View -> Syntax -> ZX BASIC!
