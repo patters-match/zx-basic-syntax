@@ -25,38 +25,7 @@ contexts:
     - include: comments
     - include: labels
     - include: expressions
-    - include: inline-asm   
-
-    - match: '^\s*(#\s*(?:(?i)include))\b'
-      captures:
-        1: keyword.control.import.include.zx-basic
-      push:
-        - meta_scope: meta.preprocessor.include.zx-basic
-        - match: '"'
-          scope: punctuation.definition.string.begin.zx-basic
-          push:
-            - meta_scope: string.quoted.double.include.zx-basic
-            - match: '"'
-              scope: punctuation.definition.string.end.zx-basic
-              pop: true
-        - match: <
-          scope: punctuation.definition.string.begin.zx-basic
-          push:
-            - meta_scope: string.quoted.other.lt-gt.include.zx-basic
-            - match: ">"
-              scope: punctuation.definition.string.end.zx-basic
-              pop: true
-        - match: $
-          pop: true
-
-    - match: '^\s*(#\s*(?i)define)\b'
-      captures:
-        1: keyword.control.import.define.zx-basic
-      push:
-        - meta_content_scope: meta.preprocessor.macro.zx-basic
-        - include: main
-        - match: $
-          pop: true
+    - include: inline-asm
 
     # line numbers
     - match: '^\s*\d+\s'
@@ -201,10 +170,11 @@ contexts:
     # strings in YAML. When using single quoted strings, only single quotes
     # need to be escaped: this is done by using two single quotes next to each
     # other.
+    - include: preprocessor
 
-    #ZX BASIC comments follow a single quote
-    #Sinclair BASIC comments follow REM
-    #zmakebas comments must start the line with hash
+    # ZX BASIC comments follow a single quote
+    # Sinclair BASIC comments follow REM
+    # zmakebas comments must start the line with hash
     - match: '''|\b(?i)REM\b|^#'
       scope: punctuation.definition.comment.zx-basic
       push:
@@ -220,6 +190,39 @@ contexts:
           scope: punctuation.definition.comment.end.zx-basic
           pop: true
 
+
+
+  preprocessor:
+    - match: '^\s*(#\s*(?:(?i)include))\b'
+      captures:
+        1: keyword.control.import.include.zx-basic
+      push:
+        - meta_scope: meta.preprocessor.include.zx-basic
+        - match: '"'
+          scope: punctuation.definition.string.begin.zx-basic
+          push:
+            - meta_scope: string.quoted.double.include.zx-basic
+            - match: '"'
+              scope: punctuation.definition.string.end.zx-basic
+              pop: true
+        - match: <
+          scope: punctuation.definition.string.begin.zx-basic
+          push:
+            - meta_scope: string.quoted.other.lt-gt.include.zx-basic
+            - match: ">"
+              scope: punctuation.definition.string.end.zx-basic
+              pop: true
+        - match: $
+          pop: true
+
+    - match: '^\s*(#\s*(?i)define)\b'
+      captures:
+        1: keyword.control.import.define.zx-basic
+      push:
+        - meta_content_scope: meta.preprocessor.macro.zx-basic
+        - include: main
+        - match: $
+          pop: true
 
 
   inline-asm:
