@@ -2,11 +2,15 @@
 ---
 # See http://www.sublimetext.com/docs/3/syntax.html
 
-# Syntax highlighting for ZX BASIC SDK - an enhanced BASIC dialect which compiles to optimized Z80 machine code for the Sinclair ZX Spectrum
-
+# Syntax highlighting for:
+#   - ZX BASIC SDK - an enhanced BASIC dialect which compiles to optimized Z80 machine code for the Sinclair ZX Spectrum
+#   - ZX Spectrum Sinclair BASIC
+#   - zmakebas
+#
 # Like Sublime Text, ZX BASIC is available for Windows, Linux, and Mac OS - at www.boriel.com
 # The aim of this syntax definition is to maximise code clarity, not to simply highlight every possible BASIC keyword 
 # Built-in colour scheme 'Mariana' is recommended
+# ZX BASIC inline assembly highlighting depends on https://github.com/mrcook/Z80Assembly
 
 name: ZX BASIC
 file_extensions:
@@ -19,8 +23,9 @@ variables:
 contexts:
   main:
     - include: comments
+    - include: labels
     - include: expressions
-    - include: inline-asm
+    - include: inline-asm   
 
     - match: '^\s*(#\s*(?:(?i)include))\b'
       captures:
@@ -53,17 +58,25 @@ contexts:
         - match: $
           pop: true
 
-    #line numbers
-    - match: ^\s*\d+\s
+    # line numbers
+    - match: '^\s*\d+\s'
       scope: entity.name.function.line-number.zx-basic
 
-    #variable types
+    # special case for these statements which can contain single quote as a line break, rather than to denote a comment
+    - match: '\b(?i:LPRINT|PRINT|INPUT)\b'
+      push:
+        - meta_content_scope: source.zx-basic
+        - include: expressions
+        - match: ':|$'
+          pop: true
+
+    # variable types
     - match: '\b(?i:UBYTE|BYTE|UINTEGER|INTEGER|ULONG|LONG|FIXED|FLOAT|STRING)\b'
       scope: storage.type.zx-basic
 
-    #function and subroutine definitions
-    #uncomment the scopes below to highlight FUNCTION and SUB keywords to match ASM keyword
-    #I judged this to be too cluttered, ideally these blocks should be nested for clarity. Inline ASM on the other hand definitely needs emphasis
+    # function and subroutine definitions
+    # uncomment the scopes below to highlight FUNCTION and SUB keywords to match ASM keyword
+    # I judged this to be too cluttered, ideally these blocks should be nested for clarity. Inline ASM on the other hand definitely needs emphasis
     - match: '\b(?i:FUNCTION FASTCALL|FUNCTION|SUB)\b\s*({{identifier}})\b'
       captures:
         #0: punctuation.section.group.begin.zx-basic
@@ -73,14 +86,8 @@ contexts:
         - include: main
         
         - match: '\b(?i:END FUNCTION|END SUB)\b'
-        #  scope: punctuation.section.group.end.zx-basic
+        #scope: punctuation.section.group.end.zx-basic
           pop: true
-
-    #label - does not actually seem to be highlighted in the default colour schemes
-    - match: '^\s*((?!default){{identifier}})(:)'
-      captures:
-        1: entity.name.label.zx-basic
-        2: punctuation.separator.zx-basic
 
     - match: '\b(?i:FOR|NEXT|DO|LOOP|CONTINUE|EXIT)\b'
       scope: keyword.control.zx-basic
@@ -91,15 +98,15 @@ contexts:
     - match: '\b(?i:IF|THEN|ELSE|ELSEIF|END IF|WHILE|END WHILE|WEND|UNTIL)\b'
       scope: keyword.control.conditional.zx-basic
 
-    #too visually distracting - sometimes less is more. I prefer to accentuate only the control keywords and the custom functions (and arrays)
+    # too visually distracting - sometimes less is more. I prefer to accentuate only the control keywords and the custom functions (and arrays)
     #- match: '\b(?i:CHR\$|INKEY\$|SCREEN\$|STR\$)|\b(?i:ABS|ACS|ASN|ATN|CAST|CHR|CODE|COS|EXP|IN|INKEY|INPUT|INT|LBOUND|LEN|LN|PEEK|SCREEN|SGN|SIN|SQR|STR|TAN|UBOUND|VAL)\b'
     #  scope: support.function.zx-basic
 
-    #too visually distracting - sometimes less is more
+    # too visually distracting - sometimes less is more
     #- match: '\b(?i:AND|NOT|OR|XOR|BAND|BNOT|BOR|BXOR|SHL|SHR|<<|>>)\b'
     #  scope: keyword.operator.word.zx-basic
 
-    #function or sub call, however this is indistinguishable from an array reference since the syntax is analysed one line at a time with REGEXP matching only
+    # function or sub call, however this is indistinguishable from an array reference since the syntax is analysed one line at a time with REGEXP matching only
     - match: (?={{identifier}}\s*\()
       push:
         - meta_content_scope: meta.function-call.zx-basic
@@ -125,7 +132,7 @@ contexts:
     - match: '(%[0-1]+|\b[0-1]+b)\b'
       scope: constant.numeric.integer.binary.zx-basic
 
-      #although it's not in the spec, 0x prefixed hex numbers do seem to be required as parameters for HRPrint library (high res print)
+      # although it's not in the spec, 0x prefixed hex numbers do seem to be required as parameters for HRPrint library (high res print)
     - match: '(\$[A-Fa-f0-9]+|\b(?i:0x)[A-Fa-f0-9]+|\b[A-Fa-f0-9]+h)\b'
       scope: constant.numeric.integer.hexadecimal.zx-basic
 
@@ -144,10 +151,10 @@ contexts:
     - match: '\='
       scope: keyword.operator.assignment.zx-basic
 
-    - match: '_'
+    - match: '_|\\$'
       scope: punctuation.separator.continuation.zx-basic
 
-    - match: ':|,|;'
+    - match: ':|,|;|'''
       scope: punctuation.separator.zx-basic
 
 
@@ -158,13 +165,21 @@ contexts:
       push:
         - meta_scope: string.quoted.double.zx-basic
         
-        #valid escape character sequences from https://zxbasic.readthedocs.io/en/docs/syntax/#graphic-characters
-        #these have to be escaped in for YAML first, then for the REGEXP, then for the compiler!
-        #note the trailing empty match to ensure a single \ is highlighted as an escape character
-        - match: '\\([a-u]|[A-U]|\\|\*|\`|\#[0-9]{3}|\{i[0-8]\}|\{p[0-8]\}|\{b[0-1]\}|\{f[0-1]\}|\  | ''|\'' |''''| \.| :|\''\.|'':|\. |\.''|: |:''|\.\.|\.:|:\.|::|)'
+        # you can break a string over multiple lines in zmakebas
+        - match: '\\$'
+          scope: punctuation.separator.continuation.zx-basic          
+
+        # valid escape character sequences from https://zxbasic.readthedocs.io/en/docs/syntax/#graphic-characters
+        # these have to be escaped in for YAML first, then for the REGEXP, then for the compiler!
+        # note the trailing empty match to ensure a single \ is highlighted as an escape character
+        - match: '\\(\\|\*|\`|\#[0-9]{3}|\{i[0-8]\}|\{p[0-8]\}|\{b[0-1]\}|\{f[0-1]\}|[a-u]|[A-U]|\  | ''|\'' |''''| \.| :|\''\.|'':|\. |\.''|: |:''|\.\.|\.:|:\.|::)'
           scope: constant.character.escape.zx-basic
 
-        #a quote can be escaped by using a double quote within a string
+        # valid zmakebas escape character sequences from https://github.com/chris-y/zmakebas#user-defined-graphics-udg
+        - match: '\\(\{[0-9]{1,3}\}|\{0x[A-Za-z0-9]{1,2}\})'
+          scope: constant.character.escape.zx-basic
+
+        # a quote can be escaped by using a double quote within a string
         - match: '""'
           scope: constant.character.escape.zx-basic
 
@@ -174,14 +189,23 @@ contexts:
 
 
 
+  #zmakebas labels
+  labels:
+    - match: '@[0-9A-Za-z_-]*'
+      scope: entity.name.function.line-number.zx-basic
+
+
+
   comments:
     # Note that blackslashes don't need to be escaped within single quoted
     # strings in YAML. When using single quoted strings, only single quotes
     # need to be escaped: this is done by using two single quotes next to each
     # other.
-  
-    #comments begin with REM or ' and finish at the end of the line
-    - match: '''|\b(?i)REM\b'
+
+    #ZX BASIC comments follow a single quote
+    #Sinclair BASIC comments follow REM
+    #zmakebas comments must start the line with hash
+    - match: '''|\b(?i)REM\b|^#'
       scope: punctuation.definition.comment.zx-basic
       push:
         - meta_scope: comment.line.zx-basic
@@ -199,9 +223,8 @@ contexts:
 
 
   inline-asm:
-    #uses an external syntax for ASM: https://github.com/mrcook/Z80Assembly
-    #if you would rather not highlight inline ASM, but still want comments to stand out, then
-    #comment this section and uncomment the two sections below
+    #use an external syntax for ASM, e.g.: https://github.com/mrcook/SkoolkitZ80 or https://github.com/mrcook/Z80Assembly
+    #his doesn't work so well because this one in particular is quite dependent on a dedicated theme - non-standard scopes perhaps?
     - match: '\b(?i:ASM)\b'
       scope: punctuation.section.group.begin.zx-basic
       push: Packages/User/Z80Assembly.tmLanguage.sublime-syntax
@@ -222,9 +245,9 @@ contexts:
 #        - match: '\b(?i:END ASM)\b'
 #          scope: punctuation.section.group.end.zx-basic
 #          pop: true
-  
- 
-  
+#
+#
+#
 #  asm-comments:
 #    #asm comments begin with ; and finish at the end of the line
 #    - match: ';'
@@ -233,11 +256,3 @@ contexts:
 #        - meta_scope: comment.line.inline-asm.zx-basic
 #        - match: $
 #          pop: true
-
-
-        
-
-
-
-
-
