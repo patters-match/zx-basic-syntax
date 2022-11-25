@@ -10,7 +10,7 @@ This syntax highlighter does not exhaustively match all BASIC keywords, rather i
 
 
 ### Highlighting Scope:
-- Line numbers, and zmakebas labels
+- Line numbers, and labels which replace them
 - Comment lines, comment blocks
 - Strings including all [ZX BASIC escaped characters](https://zxbasic.readthedocs.io/en/docs/syntax/#graphic-characters) and [zmakebas escaped characters](https://github.com/ohnosec/zmakebas#user-defined-graphics-udg)
 - To avoid over-colouring, keywords are limited to conditionals and those controlling execution flow
