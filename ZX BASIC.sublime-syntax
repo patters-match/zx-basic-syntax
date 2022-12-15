@@ -145,7 +145,7 @@ contexts:
           scope: constant.character.escape.zx-basic
 
         # valid zmakebas escape character sequences from https://github.com/chris-y/zmakebas#user-defined-graphics-udg
-        - match: '\\(\{[0-9]{1,3}\}|\{0x[A-Za-z0-9]{1,2}\})'
+        - match: '\\(\{[0-9]{1,3}\}|\{0x[A-Za-z0-9]{1,2}\}|@)'
           scope: constant.character.escape.zx-basic
 
         # a quote can be escaped by using a double quote within a string
